@@ -7,6 +7,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(morgan("dev"))
+app.use(express.static("public"))
 
 // ← ADD YEH ROOT ROUTE
 app.get("/", (req, res) => {
@@ -28,6 +29,10 @@ app.get("/api/users", (req, res) => {
     { id: 3, name: "karan" }
   ]
   res.status(200).json(users)
+})
+
+app.get("*name",(req,res)=>{
+  res.sendFile("public/index.html", {root: __dirname})
 })
 
 app.get("/api/hello", (req, res) => {
